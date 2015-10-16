@@ -1,4 +1,10 @@
+require 'fitbit/activities'
+require 'fitbit/bodies'
 require 'fitbit/client'
+require 'fitbit/devices'
+require 'fitbit/friends'
+require 'fitbit/heart_rate'
+require 'fitbit/profile'
 require 'fitbit/version'
 require 'oauth2'
 
@@ -6,10 +12,6 @@ module Fitbit
   API_URI = 'https://api.fitbit.com/1'
 
   class Client
-    def body_fat(date: Date.today, user_id: '-')
-      return get("/user/#{user_id}/body/log/fat/date/#{date}.json")
-    end
-
     def heart_rate_time_series(date = Date.today, period = '1d', user_id = '-')
       return get("#{API_URI}/user/#{user_id}/activities/heart/date/#{date}/#{period}.json")
     end

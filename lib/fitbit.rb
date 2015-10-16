@@ -1,5 +1,5 @@
-require 'fitbit/version'
 require 'fitbit/client'
+require 'fitbit/version'
 require 'oauth2'
 
 module Fitbit

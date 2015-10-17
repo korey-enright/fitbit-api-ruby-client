@@ -10,5 +10,24 @@ module Fitbit
               :raise_errors     => true}
       @access_token = OAuth2::AccessToken.new(client, access_token, opts)
     end
+
+    private
+      def get(uri)
+        begin
+          response = @access_token.get(uri)
+          return JSON.parse(response.body)
+        rescue => e
+          return e
+        end
+      end
+
+      def post(uri, opts)
+        begin
+          response = @access_token.post(uri, opts)
+          return JSON.parse(response.body)
+        rescue => e
+          return e
+        end
+      end
   end
 end

@@ -9,5 +9,9 @@ module Fitbit
 
       end
     end
+
+    def heart_rate_intraday_time_series(base_date: 'today', start_time: '00:00', end_date: 'today', end_time: '23:59', detail_level: '1min', user_id: '-')
+      return get("#{API_URI}/user/#{user_id}/activities/heart/date/#{base_date}/#{end_date}/#{detail_level}/time/#{start_time}/#{end_time}.json")
+    end
   end
 end

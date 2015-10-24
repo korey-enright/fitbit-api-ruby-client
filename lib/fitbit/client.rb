@@ -23,7 +23,7 @@ module Fitbit
 
       def post(uri, opts)
         begin
-          response = @access_token.post(uri, opts)
+          response = @access_token.post(uri, {body: opts})
           return JSON.parse(response.body)
         rescue => e
           return e

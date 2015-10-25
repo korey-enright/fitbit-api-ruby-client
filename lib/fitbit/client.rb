@@ -29,5 +29,14 @@ module Fitbit
           return e
         end
       end
+
+      def delete(uri, opts: nil)
+        begin
+          response = @access_token.delete(uri, {body: opts})
+          return response
+        rescue => e
+          return e
+        end
+      end
   end
 end

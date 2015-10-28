@@ -5,6 +5,7 @@ require 'fitbit/devices'
 require 'fitbit/friends'
 require 'fitbit/heart_rate'
 require 'fitbit/profile'
+require 'fitbit/sleep'
 require 'fitbit/version'
 require 'oauth2'
 

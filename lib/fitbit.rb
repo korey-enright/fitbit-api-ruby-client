@@ -1,5 +1,5 @@
-require 'fitbit/activities'
-require 'fitbit/bodies'
+require 'fitbit/activity'
+require 'fitbit/body'
 require 'fitbit/client'
 require 'fitbit/devices'
 require 'fitbit/friends'

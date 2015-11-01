@@ -1,11 +1,14 @@
 module Fitbit
   class Client
-    # @overload body_fat_logs(date:)
+    # @overload body_fat_logs(user_id: '-', date:)
+    #   @param [String] user_id: User ID
     #   @param [String] date: The date to retrieve body fat
-    # @overload body_fat_logs(date:, period:)
+    # @overload body_fat_logs(user_id: '-', date:, period:)
+    #   @param [String] user_id: User ID
     #   @param [String] date: The date to retrieve body fat
     #   @param [String] period: The period to retrieve body fat
-    # @overload body_fat_logs(base_date:, end_date:)
+    # @overload body_fat_logs(user_id: '-', base_date:, end_date:)
+    #   @param [String] user_id: User ID
     #   @param [String] base_date: The base date to retrieve body fat
     #   @param [String] end_date: The end date to retrieve body fat
     # @return [Hash] response data from Fitbit API

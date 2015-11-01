@@ -63,6 +63,7 @@ module Fitbit
       end
     end
 
+    # @param [String] user_id: User ID
     # @param [String] activity_id: Activity ID
     # @param [String] atctivity_name: Activity name
     # @param [String] manual_calories: manual calories
@@ -76,6 +77,7 @@ module Fitbit
       post("#{API_URI}/user/#{user_id}/activities.json", opts)
     end
 
+    # @param [String] user_id: User ID
     # @param [String] log_id: Log ID
     # @return [Hash] response data from Fitbit API
     def delete_activity_log(user_id: '-', log_id:)
@@ -88,6 +90,7 @@ module Fitbit
       return get("#{API_URI}/user/#{user_id}/activities/list.json")
     end
 
+    # @param [String] user_id: User ID
     # @param [String] log_id: Log ID
     # @return [Hash] response data from Fitbit API
     def activity_tcx(user_id: '-', log_id:)
@@ -123,24 +126,28 @@ module Fitbit
       return get("#{API_URI}/user/#{user_id}/activities/favorite.json")
     end
 
+    # @param [String] user_id: User ID
     # @param [String] activity_id: Activity ID
     # @return [Hash] response data from Fitbit API
     def add_favorite_activity(user_id: '-', activity_id:)
       return post("#{API_URI}/user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
 
+    # @param [String] user_id: User ID
     # @param [String] activity_id: Activity ID
     # @return [Hash] response data from Fitbit API
     def delete_favorite_activity(user_id: '-', activity_id)
       return delete("#{API_URI}/user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
 
+    # @param [String] user_id: User ID
     # @param [String] period: period
     # @return [Hash] response data from Fitbit API
     def activity_goals(user_id: '-', period:)
       return get("#{API_URI}/user/#{user_id}/activities/goals/#{period}.json")
     end
 
+    # @param [String] user_id: User ID
     # @param [String] period: period
     # @param [String] calories_out: calories out
     # @param [String] active_minutes: active minutes

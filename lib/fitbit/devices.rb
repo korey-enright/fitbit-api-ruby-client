@@ -63,6 +63,7 @@ module Fitbit
       return post("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
     end
 
+    # @param [String] user_id: User ID
     # @param [String] tracker_id: Tracker ID
     # @param [String] alarm_id: Alarm ID
     # @return [Object] response data from Fitbit API

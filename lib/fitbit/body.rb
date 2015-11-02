@@ -1,16 +1,20 @@
 module Fitbit
   class Client
+    # The Get Body Fat Logs API retrieves a list of all user's body fat log entries for a given
+    # day in the format requested. Body fat log entries are available only to authorized user.
+    # If you need to fetch only the most recent entry, you can use the Get Body Measurements
+    # endpoint.
     # @overload body_fat_logs(user_id: '-', date:)
-    #   @param [String] user_id: User ID
-    #   @param [String] date: The date to retrieve body fat
+    #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    #   @param [String] date: The date in the format yyyy-MM-dd.
     # @overload body_fat_logs(user_id: '-', date:, period:)
-    #   @param [String] user_id: User ID
-    #   @param [String] date: The date to retrieve body fat
+    #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    #   @param [String] date: The date in the format yyyy-MM-dd.
     #   @param [String] period: The period to retrieve body fat
     # @overload body_fat_logs(user_id: '-', base_date:, end_date:)
-    #   @param [String] user_id: User ID
-    #   @param [String] base_date: The base date to retrieve body fat
-    #   @param [String] end_date: The end date to retrieve body fat
+    #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    #   @param [String] base_date: The end date when period is provided; range start date when a date range is provided. In the format yyyy-MM-dd or today.
+    #   @param [String] end_date: Range end date when date range is provided. Note: The range should not be longer than 31 days.
     # @return [Hash] response data from Fitbit API
     def body_fat_logs(user_id: '-', date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period

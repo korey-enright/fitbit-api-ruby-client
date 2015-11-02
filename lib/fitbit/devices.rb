@@ -1,41 +1,47 @@
 module Fitbit
   class Client
-    # @param [String] user_id: User ID
+    # The Get Device endpoint returns a list of the Fitbit devices connected to a user's
+    # account.
+    # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Object] response data from Fitbit API
     def devices(user_id: '-')
       return get("#{API_URI}/user/#{user_id}/devices.json")
     end
 
-    # @param [String] user_id: User ID
-    # @param [String] tracker_id: tracker
+    # The Get Alarms endpoint returns a list of the set alarms connected to a user's account.
+    # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    # @param [String] tracker_id: The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
     # @return [Object] response data from Fitbit API
     def alarms(user_id: '-', tracker_id:)
       return get("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")
     end
 
-    # @param [String] user_id: User ID
-    # @param [String] tracker_id: tracker id
-    # @param [String] time: time
-    # @param [Boolean] enabled: enabled
-    # @param [Boolean] recurring: recurring
-    # @param [String] week_days: week days
+    # The Add Alarm endpoint adds the alarm settings to a given ID for a given device.
+    # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    # @param [String] tracker_id: The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
+    # @param [String] time: Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00
+    # @param [Boolean] enabled: true or false. If false, alarm does not vibrate until enabled is set to true.
+    # @param [Boolean] recurring: true or false. If false, the alarm is a single event.
+    # @param [String] week_days: Comma separated list of days of the week on which the alarm vibrates, e.g. MONDAY,TUESDAY
     # @return [Object] response data from Fitbit API
     def add_alarm(user_id: '-', tracker_id:, time:, enabled: true, recurring: true, week_days:)
       opts = {time: time, enabled: enabled, recurring: recurring, weekDays: week_days}
       return post("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
     end
 
-    # @param [String] user_id: User ID
-    # @param [String] tracker_id: tracker id
-    # @param [String] alarm_id: alarm id
-    # @param [String] time: time
-    # @param [Boolean] enabled: enabled
-    # @param [Boolean] recurring: recurring
-    # @param [String] week_days: week days
-    # @param [String] snooze_length: snooze length
-    # @param [String] snooze_count: snooze count
-    # @param [String] label: label
-    # @param [String] vibe: vibe
+    # The Update Alarm endpoint updates the alarm entry with a given ID for a given device.
+    # It also gets a response in the format requested.
+    # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    # @param [String] tracker_id: The ID of the tracker whose alarms is managed. The tracker_id value is found via the Get Devices endpoint.
+    # @param [String] alarm_id: The ID of the alarm to be updated. The alarm_id value is found in the response of the Get Alarms endpoint.
+    # @param [String] time: Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00
+    # @param [Boolean] enabled: true or false. If false, alarm does not vibrate until enabled is set to true.
+    # @param [Boolean] recurring: true or false. If false, the alarm is a single event.
+    # @param [String] week_days: Comma separated list of days of the week on which the alarm vibrates, e.g. MONDAY,TUESDAY
+    # @param [String] snooze_length: Minutes between alarms; integer value.
+    # @param [String] snooze_count: Maximum snooze count; integer value.
+    # @param [String] label: Label for the alarm; string value.
+    # @param [String] vibe: Vibe pattern; only one value for now - DEFAULT.
     # @return [Object] response data from Fitbit API
     def update_alarm(user_id: '-', tracker_id:, alarm_id:, time: nil, enabled: nil, recurring: nil, week_days: nil, snooze_length: nil, snooze_count: nil, label: nil, vibe: nil)
       registered_alarms = alarms(user_id: user_id, tracker_id: tracker_id)
@@ -63,9 +69,11 @@ module Fitbit
       return post("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
     end
 
-    # @param [String] user_id: User ID
-    # @param [String] tracker_id: Tracker ID
-    # @param [String] alarm_id: Alarm ID
+    # The Delete Alarm API deletes the user's device alarm entry with the given ID for a given
+    # device.
+    # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    # @param [String] tracker_id: The ID of the tracker whose alarms is managed. The tracker_id value is found via the Get Devices endpoint.
+    # @param [String] alarm_id: The ID of the alarm that is updated. The alarm_id value is found via the Get Alarms endpoint.
     # @return [Object] response data from Fitbit API
     def delete_alarm(user_id: '-', tracker_id:, alarm_id:)
       return delete("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json")

@@ -25,6 +25,9 @@ module Fitbit
       end
     end
 
+    # Access to the Intraday Time Series for personal use (accessing your own
+    # data) is available through the
+    # {https://dev.fitbit.com/docs/basics/#personal "Personal" App Type}.
     # Access to the Intraday Time Series for all other uses is currently granted on a
     # case-by-case basis. Applications must demonstrate necessity to create a great user
     # experience. Fitbit is very supportive of non-profit research and personal projects.
@@ -37,9 +40,6 @@ module Fitbit
     # 1d), the response will include extended intraday values with a one-minute detail level for
     # that day. Unlike other time series calls that allow fetching data of other users, intraday
     # data is available only for and to the authorized user.
-    # @note Coming soon: access to the Intraday Time Series for personal use (1 user accessing
-    #   their own data) is available through the
-    #   {https://dev.fitbit.com/docs/basics/#personal "Personal" App Type}.
     # @overload heart_rate_intraday_time_series(user_id: '-', base_date:, end_date: detail_level:)
     #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     #   @param [String] base_date: The range start date, in the format yyyy-MM-dd or today.

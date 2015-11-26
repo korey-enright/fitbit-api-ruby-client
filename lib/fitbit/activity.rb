@@ -35,8 +35,8 @@ module Fitbit
       end
     end
 
-    # Coming soon: access to the Intraday Time Series for personal use (1 user accessing
-    # their own data) is available through the
+    # Access to the Intraday Time Series for personal use (accessing your own
+    # data) is available through the
     # {https://dev.fitbit.com/docs/basics/#personal "Personal" App Type}.
     # Access to the Intraday Time Series for all other uses is currently granted on a
     # case-by-case basis. Applications must demonstrate necessity to create a great user

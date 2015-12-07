@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['kaoru.mori@gmail.com']
 
   spec.summary       = %q{Client for accessing Fitbit APIs.}
-  spec.description   = %q{Client for accessing Fitbit APIs. This library uses OAuth 2.0.}
+  spec.description   = %q{Client for accessing Fitbit APIs. This library supports OAuth 2.0.}
   spec.homepage      = 'https://github.com/kaorumori/fitbit-api-ruby-client'
   spec.license       = 'Apache 2.0'
   spec.required_ruby_version = '~> 2.1'

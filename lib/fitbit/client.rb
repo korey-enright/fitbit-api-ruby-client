@@ -14,6 +14,7 @@ module Fitbit
     private
       def get(uri)
         begin
+          @access_token.refresh! if @access_token.expired?
           response = @access_token.get(uri)
           return JSON.parse(response.body)
         rescue => e
@@ -23,6 +24,7 @@ module Fitbit
 
       def post(uri, opts: nil)
         begin
+          @access_token.refresh! if @access_token.expired?
           response = @access_token.post(uri, {body: opts})
           return JSON.parse(response.body)
         rescue => e
@@ -32,6 +34,7 @@ module Fitbit
 
       def delete(uri, opts: nil)
         begin
+          @access_token.refresh! if @access_token.expired?
           response = @access_token.delete(uri, {body: opts})
           return response
         rescue => e

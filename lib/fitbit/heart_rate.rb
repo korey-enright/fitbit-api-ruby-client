@@ -40,12 +40,12 @@ module Fitbit
     # 1d), the response will include extended intraday values with a one-minute detail level for
     # that day. Unlike other time series calls that allow fetching data of other users, intraday
     # data is available only for and to the authorized user.
-    # @overload heart_rate_intraday_time_series(user_id: '-', base_date:, end_date: detail_level:)
+    # @overload heart_rate_intraday_time_series(user_id: '-', base_date:, end_date:, detail_level:)
     #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     #   @param [String] base_date: The range start date, in the format yyyy-MM-dd or today.
     #   @param [String] end_date: The end date of the range.
     #   @param [String] detail_level: Number of data points to include. Either 1sec or 1min.
-    # @overload heart_rate_intraday_time_series(user_id: '-', base_date:, end_date: start_time: end_time:, detail_level:)
+    # @overload heart_rate_intraday_time_series(user_id: '-', base_date:, end_date:, start_time:, end_time:, detail_level:)
     #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     #   @param [String] base_date: The range start date, in the format yyyy-MM-dd or today.
     #   @param [String] end_date: The end date of the range.
@@ -56,7 +56,7 @@ module Fitbit
     #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     #   @param [String] date: The date, in the format yyyy-MM-dd or today.
     #   @param [String] detail_level: Number of data points to include. Either 1sec or 1min.
-    # @overload heart_rate_intraday_time_series(user_id: '-', date: start_time: end_time:, detail_level:)
+    # @overload heart_rate_intraday_time_series(user_id: '-', date:, start_time:, end_time:, detail_level:)
     #   @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     #   @param [String] date: The date, in the format yyyy-MM-dd or today.
     #   @param [String] start_time: The start of the period, in the format HH:mm.

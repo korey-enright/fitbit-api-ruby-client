@@ -8,11 +8,13 @@ require 'fitbit/profile'
 require 'fitbit/sleep'
 require 'fitbit/version'
 require 'oauth2'
+require 'base64'
+require 'json'
+require 'faraday'
 
 module Fitbit
   API_URI = 'https://api.fitbit.com/1'
 
   class Client
-
   end
 end

@@ -1,8 +1,6 @@
 # Fitbit
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fitbit`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+fitbit-api-client provides access to Fitbit API. fitbit-api-client supports OAuth 2.0.
 
 ## Installation
 
@@ -22,7 +20,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+client = Fitbit::Client.new(
+  client_id: Settings.fitbit.client_id,
+  client_secret: Settings.fitbit.client_secret,
+  access_token: current_user.access_token,
+  refresh_token: current_user.refresh_token,
+  expires_at: current_user.expires_at)
+
+p client.activity
+```
 
 ## Development
 

@@ -25,7 +25,7 @@ module Fitbit
     #   @param [String] base_date: The range start date, in the format yyyy-MM-dd or today.
     #   @param [String] end_date: The end date of the range.
     # @return [Hash] response data from Fitbit API
-    def activity_time_series(user_id: '-', resource_path:, date: nil, period: nil, base_date: nil, end_data: nil)
+    def activity_time_series(user_id: '-', resource_path:, date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period
         return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{date}/#{period}.json")
       elsif base_date and end_date

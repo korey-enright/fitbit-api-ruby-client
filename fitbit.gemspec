@@ -13,7 +13,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Client for accessing Fitbit APIs.}
   spec.description   = %q{Client for accessing Fitbit APIs. This library supports OAuth 2.0.}
   spec.homepage      = 'https://github.com/kaorumori/fitbit-api-ruby-client'
-  spec.license       = 'Apache 2.0'
+  spec.license       = 'Apache-2.0'
   spec.required_ruby_version = '~> 2.1'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or

@@ -6,7 +6,7 @@ require 'fitbit/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'fitbit-api-client'
-  spec.version       = Fitbit::VERSION
+  #spec.version       = Fitbit::VERSION
   spec.authors       = ['Kaoru Mori']
   spec.email         = ['kaoru.mori@gmail.com']
 

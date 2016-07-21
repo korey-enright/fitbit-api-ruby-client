@@ -1,3 +1,3 @@
 module Fitbit
-  VERSION = '0.0.16'
+  VERSION = 'master' #'0.0.16'
 end

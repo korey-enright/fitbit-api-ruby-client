@@ -37,30 +37,18 @@ module Fitbit
 
     private
       def get(uri)
-        begin
-          response = @access_token.get(uri)
-          return JSON.parse(response.body)
-        rescue => e
-          return e
-        end
+        response = @access_token.get(uri)
+        return JSON.parse(response.body)
       end
 
       def post(uri, opts: nil)
-        begin
-          response = @access_token.post(uri, {body: opts})
-          return JSON.parse(response.body)
-        rescue => e
-          return e
-        end
+        response = @access_token.post(uri, {body: opts})
+        return JSON.parse(response.body)
       end
 
       def delete(uri, opts: nil)
-        begin
-          response = @access_token.delete(uri, {body: opts})
-          return response
-        rescue => e
-          return e
-        end
+        response = @access_token.delete(uri, {body: opts})
+        return response
       end
   end
 end

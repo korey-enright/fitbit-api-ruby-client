@@ -7,7 +7,7 @@ module Fitbit
     # @param [String] client_secret: OAuth2 client secret.
     # @param [String] token: OAuth2 access token.
     # @param [String] refresh_token: OAuth2 refresh token.
-    # @param [FixNum, String] expires_at: OAuth2 expires at.
+    # @param [Integer, String] expires_at: OAuth2 expires at.
     def initialize(client_id:, client_secret:, token:, refresh_token:, expires_at:)
       @basic_token = Base64.strict_encode64("#{client_id}:#{client_secret}")
 

@@ -38,7 +38,11 @@ module Fitbit
     private
       def get(uri)
         response = @access_token.get(uri)
-        return JSON.parse(response.body)
+        begin
+          return JSON.parse(response.body)
+        rescue
+          return response.body
+        end
       end
 
       def post(uri, opts: nil)

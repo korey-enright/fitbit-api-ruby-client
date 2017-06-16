@@ -125,9 +125,21 @@ module Fitbit
     # @note This is a beta feature. During this period, Fitbit may need to make backwards
     #   incompatible changes with less than 30 days notice.
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
+    # @param [String] beforeDate: The date in the format yyyy-MM-ddTHH:mm:ss. Only yyyy-MM-dd is required. Either beforeDate or afterDate must be specified. Set sort to desc when using beforeDate.
+    # @param [String] afterDate: The date in the format yyyy-MM-ddTHH:mm:ss. Only yyyy-MM-dd is required. Either beforeDate or afterDate must be specified. Set sort to asc when using afterDate.
+    # @param [String] sort: The sort order of entries by date. Required. Use asc (ascending) when using afterDate. Use desc (descending) when using beforeDate.
+    # @param [Integer] limit: The max of the number of entries returned (maximum: 20). Required.
+    # @param [Integer] offset: This should always be set to 0. Required for now. IMPORTANT: To paginate, request the next and previous links in the pagination response object. Do not manually specify the offset parameter, as it will be removed in the future and your app will break.
     # @return [Hash] response data from Fitbit API
-    def activity_logs_list(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/activities/list.json")
+    def activity_logs_list(user_id: '-', before_date: nil, after_date: nil, sort: 'asc', limit: 20, offset: 0)
+      opts = {beforeDate: before_date, afterDate: after_date, sort: sort, limit: limit, offset: offset}
+      if before_date
+        return get("#{API_URI}/user/#{user_id}/activities/list.json?beforeDate=#{before_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+      elsif after_date
+        return get("#{API_URI}/user/#{user_id}/activities/list.json?afterDate=#{after_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+      else
+        return get("#{API_URI}/user/#{user_id}/activities/list.json?beforeDate=#{Date.today}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+      end
     end
 
     # The Get Activity TCX endpoint retrieves the details of a user's location and heart rate

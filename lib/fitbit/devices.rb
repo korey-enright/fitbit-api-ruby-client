@@ -1,11 +1,13 @@
 module Fitbit
   class Client
+    DEVICES_API_VERSION='1'
+
     # The Get Device endpoint returns a list of the Fitbit devices connected to a user's
     # account.
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Object] response data from Fitbit API
     def devices(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/devices.json")
+      return get("#{API_URI}/#{DEVICES_API_VERSION}/user/#{user_id}/devices.json")
     end
 
     # The Get Alarms endpoint returns a list of the set alarms connected to a user's account.
@@ -13,7 +15,7 @@ module Fitbit
     # @param [String] tracker_id: The ID of the tracker for which data is returned. The tracker-id value is found via the Get Devices endpoint.
     # @return [Object] response data from Fitbit API
     def alarms(user_id: '-', tracker_id:)
-      return get("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")
+      return get("#{API_URI}/#{DEVICES_API_VERSION}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")
     end
 
     # The Add Alarm endpoint adds the alarm settings to a given ID for a given device.
@@ -26,7 +28,7 @@ module Fitbit
     # @return [Object] response data from Fitbit API
     def add_alarm(user_id: '-', tracker_id:, time:, enabled: true, recurring: true, week_days:)
       opts = {time: time, enabled: enabled, recurring: recurring, weekDays: week_days}
-      return post("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
+      return post("#{API_URI}/#{DEVICES_API_VERSION}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
     end
 
     # The Update Alarm endpoint updates the alarm entry with a given ID for a given device.
@@ -66,7 +68,7 @@ module Fitbit
       opts['label'] = label unless label.nil?
       opts['vibe'] = vibe unless vibe.nil?
 
-      return post("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
+      return post("#{API_URI}/#{DEVICES_API_VERSION}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
     end
 
     # The Delete Alarm API deletes the user's device alarm entry with the given ID for a given
@@ -76,7 +78,7 @@ module Fitbit
     # @param [String] alarm_id: The ID of the alarm that is updated. The alarm_id value is found via the Get Alarms endpoint.
     # @return [Object] response data from Fitbit API
     def delete_alarm(user_id: '-', tracker_id:, alarm_id:)
-      return delete("#{API_URI}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json")
+      return delete("#{API_URI}/#{DEVICES_API_VERSION}/user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json")
     end
   end
 end

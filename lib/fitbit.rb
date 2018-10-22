@@ -14,7 +14,7 @@ require 'json'
 require 'faraday'
 
 module Fitbit
-  API_URI = 'https://api.fitbit.com/1'
+  API_URI = 'https://api.fitbit.com'
 
   class Client
   end

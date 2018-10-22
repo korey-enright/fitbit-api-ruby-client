@@ -1,5 +1,7 @@
 module Fitbit
   class Client
+    ACTIVITY_API_VERSION='1'
+
     # The Get Daily Activity Summary endpoint retrieves a summary and list of a user's
     # activities and activity log entries for a given day in the format requested using
     # units in the unit system which corresponds to the Accept-Language header provided.
@@ -7,7 +9,7 @@ module Fitbit
     # @param [String] date: The date in the format yyyy-MM-dd
     # @return [Hash] response data from Fitbit API
     def activity(user_id: '-', date: Date.today)
-      return get("#{API_URI}/user/#{user_id}/activities/date/#{date}.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/date/#{date}.json")
     end
 
     # The Get Activity Time Series endpoint returns time series data in the specified range
@@ -27,9 +29,9 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def activity_time_series(user_id: '-', resource_path:, date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{date}/#{period}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{date}/#{period}.json")
       elsif base_date and end_date
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}.json")
       else
         raise StandardError
       end
@@ -79,13 +81,13 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def activity_intraday_time_series(user_id: '-', resource_path:, date: nil, base_date: nil, end_date: nil, start_time: nil, end_time: nil, detail_level: nil)
       if base_date and end_date and detail_level and start_time and end_time
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}/#{detail_level}/time/#{start_time}/#{end_time}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}/#{detail_level}/time/#{start_time}/#{end_time}.json")
       elsif base_date and end_date and detail_level
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}/#{detail_level}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}/#{detail_level}.json")
       elsif date and detail_level and start_time and end_time
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{date}/1d/#{detail_level}/time/#{start_time}/#{end_time}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{date}/1d/#{detail_level}/time/#{start_time}/#{end_time}.json")
       elsif date and detail_level
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{date}/1d/#{detail_level}.json")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{date}/1d/#{detail_level}.json")
       else
         raise StandardError
       end
@@ -107,7 +109,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def log_activity(user_id: '-', activity_id: nil, activity_name: nil, manual_calories: nil, start_time:, duration_millis:, date:, distance: nil, distance_unit: nil)
       opts = {activityId: activity_id, activityName: activity_name, manualCalories: manual_calories, startTime: start_time, durationMillis: duration_millis, date: date, distance: distance, distanceUnit: distance_unit}
-      post("#{API_URI}/user/#{user_id}/activities.json", opts)
+      post("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities.json", opts)
     end
 
     # The Delete Activity Log endpoint deletes a user's activity log entry with the given ID.
@@ -116,7 +118,7 @@ module Fitbit
     # @param [String] log_id: The id of the activity log entry.
     # @return [Hash] response data from Fitbit API
     def delete_activity_log(user_id: '-', log_id:)
-      delete("#{API_URI}/user/#{user_id}/activities/#{log_id}.json")
+      delete("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/#{log_id}.json")
     end
 
     # The Get Activity Logs List endpoint retrieves a list of a user's activity log entries
@@ -134,11 +136,11 @@ module Fitbit
     def activity_logs_list(user_id: '-', before_date: nil, after_date: nil, sort: 'asc', limit: 20, offset: 0)
       opts = {beforeDate: before_date, afterDate: after_date, sort: sort, limit: limit, offset: offset}
       if before_date
-        return get("#{API_URI}/user/#{user_id}/activities/list.json?beforeDate=#{before_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/list.json?beforeDate=#{before_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
       elsif after_date
-        return get("#{API_URI}/user/#{user_id}/activities/list.json?afterDate=#{after_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/list.json?afterDate=#{after_date}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
       else
-        return get("#{API_URI}/user/#{user_id}/activities/list.json?beforeDate=#{Date.today}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
+        return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/list.json?beforeDate=#{Date.today}&sort=#{sort}&limit=#{limit}&offset=#{offset}")
       end
     end
 
@@ -154,7 +156,7 @@ module Fitbit
     # @param [String] log_id: The activity's log ID.
     # @return [Hash] response data from Fitbit API
     def activity_tcx(user_id: '-', log_id:)
-      return get("#{API_URI}/user/#{user_id}/activities/#{log_id}.tcx")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/#{log_id}.tcx")
     end
 
     # Get a tree of all valid Fitbit public activities from the activities catalog as well as
@@ -183,7 +185,7 @@ module Fitbit
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def frequent_activities(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/activities/frequent.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/frequent.json")
     end
 
     # The Get Recent Activity Types endpoint retrieves a list of a user's recent activities
@@ -194,14 +196,14 @@ module Fitbit
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def recent_activities(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/activities/recent.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/recent.json")
     end
 
     # The Get Favorite Activities endpoint returns a list of a user's favorite activities.
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def favorite_activities(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/activities/favorite.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/favorite.json")
     end
 
     # The Add Favorite Activity endpoint adds the activity with the given ID to user's list of
@@ -210,7 +212,7 @@ module Fitbit
     # @param [String] activity_id: The ID of the activity to add to user's favorites.
     # @return [Hash] response data from Fitbit API
     def add_favorite_activity(user_id: '-', activity_id:)
-      return post("#{API_URI}/user/#{user_id}/activities/favorite/#{activity_id}.json")
+      return post("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
 
     # The Delete Favorite Activity removes the activity with the given ID from a user's list of
@@ -219,7 +221,7 @@ module Fitbit
     # @param [String] activity_id: The ID of the activity to be removed.
     # @return [Hash] response data from Fitbit API
     def delete_favorite_activity(user_id: '-', activity_id:)
-      return delete("#{API_URI}/user/#{user_id}/activities/favorite/#{activity_id}.json")
+      return delete("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
 
     # The Get Activity Goals retrieves a user's current daily or weekly activity goals using
@@ -229,7 +231,7 @@ module Fitbit
     # @param [String] period: daily or weekly
     # @return [Hash] response data from Fitbit API
     def activity_goals(user_id: '-', period:)
-      return get("#{API_URI}/user/#{user_id}/activities/goals/#{period}.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/goals/#{period}.json")
     end
 
     # The Update Activity Goals endpoint creates or updates a user's daily activity goals and
@@ -245,7 +247,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def update_activity_goals(user_id: '-', period:, calories_out: nil, active_minutes: nil, floors: nil, distance: nil, steps: nil)
       opts = {caloriesOut: calories_out, activeMinutes: active_minutes, floors: floors, distance: distance, steps: steps}
-      return post("#{API_URI}/user/#{user_id}/activities/goals/#{period}.json", opts)
+      return post("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities/goals/#{period}.json", opts)
     end
 
     # The Get Lifetime Stats endpoint retrieves the user's activity statistics in the format
@@ -257,7 +259,7 @@ module Fitbit
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def lifetime_stats(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/activities.json")
+      return get("#{API_URI}/#{ACTIVITY_API_VERSION}/user/#{user_id}/activities.json")
     end
   end
 end

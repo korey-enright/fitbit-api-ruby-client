@@ -1,5 +1,7 @@
 module Fitbit
   class Client
+    BODY_API_VERSION='1'
+
     # The Get Body Fat Logs API retrieves a list of all user's body fat log entries for a given
     # day in the format requested. Body fat log entries are available only to authorized user.
     # If you need to fetch only the most recent entry, you can use the Get Body Measurements
@@ -18,11 +20,11 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def body_fat_logs(user_id: '-', date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period
-        return get("#{API_URI}/user/#{user_id}/body/log/fat/date/#{date}/#{period}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/date/#{date}/#{period}.json")
       elsif date
-        return get("#{API_URI}/user/#{user_id}/body/log/fat/date/#{date}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/date/#{date}.json")
       elsif base_date and end_date
-        return get("#{API_URI}/user/#{user_id}/body/log/fat/date/#{base_date}/#{end_date}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/date/#{base_date}/#{end_date}.json")
       else
         raise StandardError
       end
@@ -38,7 +40,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def log_body_fat(user_id: '-', fat:, date:, time: nil)
       opts = {fat: fat, date: date, time: time}
-      post("#{API_URI}/user/#{user_id}/body/log/fat.json", opts)
+      post("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat.json", opts)
     end
 
     # The Delete Body Fat Log API deletes a user's body fat log entry with the given ID.
@@ -46,7 +48,7 @@ module Fitbit
     # @param [String] log_id: The ID of the body fat log entry.
     # @return [Object] response data from Fitbit API
     def delete_body_fat_log(user_id: '-', log_id:)
-      delete("#{API_URI}/user/#{user_id}/body/log/fat/#{log_id}.json")
+      delete("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/#{log_id}.json")
     end
 
     # The Get Body Time Series API returns time series data in the specified range for a given
@@ -68,9 +70,9 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def body_fat_time_series(user_id: '-', date: nil, period: nil, base_date: nil, end_data: nil)
       if date and period
-        return get("#{API_URI}/user/#{user_id}/body/log/fat/date/#{date}/#{period}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/date/#{date}/#{period}.json")
       elsif base_date and end_date
-        return get("#{API_URI}/user/#{user_id}/body/log/fat/date/#{base_date}/#{end_date}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/fat/date/#{base_date}/#{end_date}.json")
       else
         raise StandardError
       end
@@ -83,7 +85,7 @@ module Fitbit
     # @param [String] goal_type: weight or fat
     # @return [Hash] response data from Fitbit API
     def body_goals(user_id: '-', goal_type:)
-      return get("#{API_URI}/user/#{user_id}/body/log/#{goal_type}/goal.json")
+      return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/#{goal_type}/goal.json")
     end
 
     # The Update Body Fat Goal API creates or updates user's fat percentage goal.
@@ -92,7 +94,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def update_body_fat_goal(user_id: '-', fat:)
       opts = {fat: fat}
-      post("#{API_URI}/user/[user-id]/body/log/fat/goal.json", opts)
+      post("#{API_URI}/#{BODY_API_VERSION}/user/[user-id]/body/log/fat/goal.json", opts)
     end
 
     # The Update Weight Goal API creates or updates user's fat or weight goal using units in
@@ -105,7 +107,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def update_weight_goal(user_id: '-', start_date:, start_weight:, weight: nil)
       opts = {startDate: start_date, startWeight: start_weight, weight: weight}
-      post("#{API_URI}/user/#{user_id}/body/log/weight/goal.json", opts)
+      post("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight/goal.json", opts)
     end
 
     # The Get Weight Logs API retrieves a list of all user's body weight log entries for a
@@ -125,11 +127,11 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def weight_logs(user_id: '-', date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period
-        return get("#{API_URI}/user/#{user_id}/body/log/weight/date/#{date}/#{period}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight/date/#{date}/#{period}.json")
       elsif date
-        return get("#{API_URI}/user/#{user_id}/body/log/weight/date/#{date}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight/date/#{date}.json")
       elsif base_date and end_date
-        return get("#{API_URI}/user/#{user_id}/body/log/weight/date/#{base_date}/#{end_date}.json")
+        return get("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight/date/#{base_date}/#{end_date}.json")
       else
         raise StandardError
       end
@@ -146,7 +148,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def log_weight(user_id: '-', weight:, date:, time: nil)
       opts = {weight: weight, date: date, time: time}
-      post("#{API_URI}/user/#{user_id}/body/log/weight.json", opts)
+      post("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight.json", opts)
     end
 
     # The Delete Weight Log API deletes a user's body weight log entry with the given ID.
@@ -154,7 +156,7 @@ module Fitbit
     # @param [String] log_id: The ID of the body weight log entry.
     # @return [Hash] response data from Fitbit API
     def delete_weight_log(user_id: '-', log_id:)
-      delete("#{API_URI}/user/#{user_id}/body/log/weight/#{log_id}.json")
+      delete("#{API_URI}/#{BODY_API_VERSION}/user/#{user_id}/body/log/weight/#{log_id}.json")
     end
   end
 end

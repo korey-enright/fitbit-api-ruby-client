@@ -1,5 +1,7 @@
 module Fitbit
   class Client
+    SLEEP_API_VERSION='1.2'
+
     # The Get Sleep Logs endpoint returns a summary and list of a user's sleep log entries as
     # well as minute by minute sleep entry data for a given day in the format requested. The
     # endpoint response includes summary for all sleep log entries for the given day (including
@@ -8,7 +10,7 @@ module Fitbit
     # @param [String] date: The date of records to be returned. In the format yyyy-MM-dd.
     # @return [Hash] response data from Fitbit API
     def sleep_logs(user_id: '-', date: Date.today)
-      return get("#{API_URI}/user/#{user_id}/sleep/date/#{date}.json")
+      return get("#{API_URI}/#{SLEEP_API_VERSION}/user/#{user_id}/sleep/date/#{date}.json")
     end
 
     # The Get Sleep Time Series endpoint returns time series data in the specified range for a
@@ -28,9 +30,9 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def sleep_time_series(user_id: '-', resource_path:, date: nil, period: nil, base_date: nil, end_date: nil)
       if date and period
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{date}/#{period}.json")
+        return get("#{API_URI}/#{SLEEP_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{date}/#{period}.json")
       elsif base_date and end_date
-        return get("#{API_URI}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}.json")
+        return get("#{API_URI}/#{SLEEP_API_VERSION}/user/#{user_id}/#{resource_path}/date/#{base_date}/#{end_date}.json")
       else
         raise StandardError
       end
@@ -47,7 +49,7 @@ module Fitbit
     # @return [Hash] response data from Fitbit API
     def log_sleep(user_id: '-', start_time:, duration:, date:)
       opts = {startTime: start_time, duration: duration, date: date}
-      post("#{API_URI}/user/#{user_id}/sleep.json", opts)
+      post("#{API_URI}/#{SLEEP_API_VERSION}/user/#{user_id}/sleep.json", opts)
     end
 
     # The Delete Sleep Log endpoint deletes a user's sleep log entry with the given ID.
@@ -55,7 +57,7 @@ module Fitbit
     # @param [String] log_id: ID of the sleep log to be deleted.
     # @return [Hash] response data from Fitbit API
     def delete_sleep_log(user_id: '-', log_id:)
-      delete("#{API_URI}/user/#{user_id}/sleep/#{log_id}.json")
+      delete("#{API_URI}/#{SLEEP_API_VERSION}/user/#{user_id}/sleep/#{log_id}.json")
     end
   end
 end

@@ -1,5 +1,6 @@
 module Fitbit
   class Client
+    SUBSCRIPTION_API_VERSION='1'
 
     # The Add Subscription endpoint registers the application to send notifications when the
     # user Fitbit data changes. The endpoint response includes a summary of the subscription
@@ -12,9 +13,9 @@ module Fitbit
     def add_subscription(user_id: '-', collection_path: nil, subscription_id: nil)
       raise StandardError if !subscription_id
       if collection_path
-        return post("#{API_URI}/user/#{user_id}/#{collection_path}/apiSubscriptions/#{subscription_id}.json")
+        return post("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/#{collection_path}/apiSubscriptions/#{subscription_id}.json")
       else
-        return post("#{API_URI}/user/#{user_id}/apiSubscriptions/#{subscription_id}.json")
+        return post("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/apiSubscriptions/#{subscription_id}.json")
       end
     end
 
@@ -25,9 +26,9 @@ module Fitbit
     # @return [Hash] response data from Fitbit API.
     def list_subscriptions(user_id: '-', collection_path: nil)
       if collection_path
-        return get("#{API_URI}/user/#{user_id}/#{collection_path}/apiSubscriptions.json")
+        return get("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/#{collection_path}/apiSubscriptions.json")
       else
-        return get("#{API_URI}/user/#{user_id}/apiSubscriptions.json")
+        return get("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/apiSubscriptions.json")
       end
     end
 
@@ -42,9 +43,9 @@ module Fitbit
     def delete_subscription(user_id: '-', collection_path: nil, subscription_id: nil)
       raise StandardError if !subscription_id
       if collection_path
-        return delete("#{API_URI}/user/#{user_id}/#{collection_path}/apiSubscriptions/#{subscription_id}.json")
+        return delete("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/#{collection_path}/apiSubscriptions/#{subscription_id}.json")
       else
-        return delete("#{API_URI}/user/#{user_id}/apiSubscriptions/#{subscription_id}.json")
+        return delete("#{API_URI}/#{SUBSCRIPTION_API_VERSION}/user/#{user_id}/apiSubscriptions/#{subscription_id}.json")
       end
     end
 

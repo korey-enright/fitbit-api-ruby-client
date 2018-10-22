@@ -1,11 +1,13 @@
 module Fitbit
   class Client
+    FRIENDS_API_VERSION='1'
+
     # The Get Friends endpoint returns data of a user's friends in the format requested using
     # units in the unit system which corresponds to the Accept-Language header provided.
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def friends(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/friends.json")
+      return get("#{API_URI}/#{FRIENDS_API_VERSION}/user/#{user_id}/friends.json")
     end
 
     # The Get Friends Leaderboard endpoint gets the user's friends leaderboard in the format
@@ -16,7 +18,7 @@ module Fitbit
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def friends_leaderboard(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/friends/leaderboard.json")
+      return get("#{API_URI}/#{FRIENDS_API_VERSION}/user/#{user_id}/friends/leaderboard.json")
     end
 
     # The Invite Friend endpoint creates an invitation to become friends with the authorized
@@ -44,7 +46,7 @@ module Fitbit
         opts['invitedUserId'] = invited_user_id
       end
 
-      return post("#{API_URI}/user/-/friends/invitations.json", opts)
+      return post("#{API_URI}/#{FRIENDS_API_VERSION}/user/-/friends/invitations.json", opts)
     end
 
     # The Get Friend Invitations endpoint returns a list of invitations to become friends with a
@@ -52,7 +54,7 @@ module Fitbit
     # @param [String] user_id: The encoded ID of the user. Use "-" (dash) for current logged-in user.
     # @return [Hash] response data from Fitbit API
     def friend_invitations(user_id: '-')
-      return get("#{API_URI}/user/#{user_id}/friends/invitations.json")
+      return get("#{API_URI}/#{FRIENDS_API_VERSION}/user/#{user_id}/friends/invitations.json")
     end
 
     # The Respond to Friend Invitation endpoint accepts or rejects an invitation to become
@@ -61,7 +63,7 @@ module Fitbit
     # @param [Boolean] accept: Accept or reject invitation. 'true' or 'false'.
     # @return [Hash] response data from Fitbit API
     def respond_to_friend_invitation(from_user_id:, accept: true)
-      return post("#{API_URI}/user/-/friends/invitations/#{from_user_id}.json", {accept: accept})
+      return post("#{API_URI}/#{FRIENDS_API_VERSION}/user/-/friends/invitations/#{from_user_id}.json", {accept: accept})
     end
   end
 end

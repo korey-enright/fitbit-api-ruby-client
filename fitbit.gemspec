@@ -7,12 +7,12 @@ require 'fitbit/version'
 Gem::Specification.new do |spec|
   spec.name          = 'fitbit-api-client'
   spec.version       = Fitbit::VERSION
-  spec.authors       = ['Kaoru Mori']
-  spec.email         = ['kaoru.mori@gmail.com']
+  spec.authors       = ['Kaoru Mori', 'Korey Enright']
+  spec.email         = ['kaoru.mori@gmail.com', 'kenright19@gmail.com']
 
   spec.summary       = %q{Client for accessing Fitbit APIs.}
   spec.description   = %q{Client for accessing Fitbit APIs. This library supports OAuth 2.0.}
-  spec.homepage      = 'https://github.com/kaorumori/fitbit-api-ruby-client'
+  spec.homepage      = 'https://github.com/korey-enright/fitbit-api-ruby-client'
   spec.license       = 'Apache-2.0'
   spec.required_ruby_version = '~> 2.1'
 

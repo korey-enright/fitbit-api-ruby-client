@@ -32,6 +32,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'oauth2', '~> 1.0'
 
   spec.add_development_dependency 'bundler', '~> 2.x'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency "rspec", '~> 3'
 end

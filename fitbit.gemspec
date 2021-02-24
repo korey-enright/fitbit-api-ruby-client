@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description   = %q{Client for accessing Fitbit APIs. This library supports OAuth 2.0.}
   spec.homepage      = 'https://github.com/korey-enright/fitbit-api-ruby-client'
   spec.license       = 'Apache-2.0'
-  spec.required_ruby_version = '~> 2.1'
+  # spec.required_ruby_version = '~> 2.1'
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
   # delete this section to allow pushing this gem to any host.
@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'oauth2', '~> 1.0'
 
-  spec.add_development_dependency 'bundler', '~> 1.10'
+  spec.add_development_dependency 'bundler', '~> 2.x'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency "rspec", '~> 3'
 end
